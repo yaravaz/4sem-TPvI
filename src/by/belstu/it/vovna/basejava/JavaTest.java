@@ -1,5 +1,8 @@
 package by.belstu.it.vovna.basejava;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import static java.lang.Math.*;
 
 public class JavaTest {
@@ -49,13 +52,13 @@ public class JavaTest {
         System.out.println(Math.min(Math.PI, Math.E));
         System.out.println(Math.random());
 
-        Boolean objBool = new Boolean(false);
-        Character objChar = new Character('f');
-        Integer objInt = new Integer(12);
-        Byte objByte = new Byte((byte)2);
-        Short objShort = new Short((short)3);
-        Long objLong = new Long(345L);
-        Double objDouble = new Double(23.45d);
+        Boolean objBool = Boolean.valueOf(false);
+        Character objChar = Character.valueOf('f');
+        Integer objInt = Integer.valueOf(12);
+        Byte objByte = Byte.valueOf((byte)2);
+        Short objShort = Short.valueOf((short)3);
+        Long objLong = Long.valueOf(345L);
+        Double objDouble = Double.valueOf(23.45d);
 
         objInt = objInt + objByte;
         objLong = objLong * objShort;
@@ -87,8 +90,115 @@ public class JavaTest {
         String s34 = "2345";
         int int1 = Integer.parseInt(s34);
         int int2 = Integer.valueOf(s34);
-        int int3 = new Integer(s34);
-        System.out.println($"");
+        int int3 = Integer.valueOf(s34);
+        System.out.println(String.format("%d %d %d",int1, int2, int3));
+        byte[] bytes = s34.getBytes();
+        System.out.println(new String(bytes));
+
+        String str = "true";
+        System.out.println(Boolean.parseBoolean(str));
+        System.out.println(Boolean.valueOf(str));
+
+        String str1 = "Hello";
+        String str2 = "Hello";
+        String str3 = new String("Hello");
+
+        System.out.println(str1.equals(str2));
+        System.out.println(str1.compareTo(str2));
+        System.out.println(str1 == str2);
+        System.out.println(str1 == str3);
+
+        str1 = null;
+
+        //System.out.println(str1.equals(str2)); // Cannot invoke "String.equals(Object)"
+        //System.out.println(str1.compareTo(str2));
+        System.out.println(str1 == str2); // false
+
+        String strToTest = "Hello, World, How, Are, You";
+        System.out.println(Arrays.toString(strToTest.split(", ")));
+        System.out.println(strToTest.contains("You"));
+        System.out.println(strToTest.hashCode());
+        System.out.println(strToTest.indexOf("How"));
+        System.out.println(strToTest.length());
+        System.out.println(strToTest.replace("How", "Who"));
+
+        char[][] c1;
+        char[] c2[];
+        char c3[][];
+
+        int[] c = new int[0];
+
+        int index = 0;
+        c1 = new char[3][];
+        for (int i = 0; i < c1.length; i++) {
+            c1[i] = new char[i+1];
+
+        }
+        for (int i = 0; i < c1.length; i++) {
+            System.out.println(c1[i].length);
+        }
+
+        c2 = new char[][]{
+                {'r', 't', 'y'},
+                {'v', 'g'},
+                {'r'}
+        };
+        c3 = new char[][]{
+                {'r', 't', 'y'},
+                {'v', 'g'},
+                {'r'}
+        };
+
+        boolean comRez = c2 == c3;
+        System.out.println(comRez);
+        c2 = c3;
+        for (char[] line : c2) {
+            for (char el : line) {
+                System.out.print(el + " ");
+            }
+            System.out.println();
+        }
+        comRez = c2 == c3;
+        System.out.println(comRez);
+
+        WrapperString wrap = new WrapperString("New String!!!!");
+        wrap.replace('!', '?');
+        System.out.println(wrap);
+
+        WrapperString newString = new WrapperString("Another string!!!"){
+            private String str2_0;
+
+            public String getStr2_0() {
+                return str2_0;
+            }
+
+            public void setStr2_0(String str2_0) {
+                this.str2_0 = str2_0;
+            }
+
+
+            @Override
+            public void replace(char oldchar, char newchar) {
+                super.replace(oldchar, newchar);
+            }
+
+            public String delete(char newchar){
+                char[] chars = str2_0.toCharArray();
+                StringBuilder stringBuilder = new StringBuilder();
+                for (char c : chars) {
+                    if (c != newchar) {
+                        stringBuilder.append(c);
+                    }
+                }
+                str2_0 = stringBuilder.toString();
+                return str2_0;
+            }
+        };
+
+        newString.replace('?', '!');
+        //System.out.println(newString.delete("!");
+
+
     }
 }
 
